@@ -1,0 +1,107 @@
+<html>
+<head>
+<title>Home</title>
+{% load static %}
+<link type="text/css" href="{% static 'blog/css/font-awesome.min.css' %}" rel="stylesheet">
+<style type="text/css">
+body{ margin:0px;padding:0px; }
+.nav{
+	width:100%;
+	left:0px;
+	top:0px;
+	right:0px;
+	height:130px;
+	background:#808080;
+	text-align:center;
+	vertical-align:middle;
+}
+.content{
+	width:70%;
+	margin-top:30px;
+	margin-left:15%;
+}
+.icon{
+	vertical-align:middle;
+}
+.menu{
+	vertical-align:middle;
+}
+li{
+	display:inline-block;
+	list-style-type:none;
+	font-size:15px;
+	padding:0 5px;
+}
+a{
+	text-decoration:none;
+	color:#f0f0f0;
+}
+a:hover{
+	cursor:pointer;
+	color:#000;
+}
+.footer{
+	position:absolute;
+	bottom:0px;
+	width:100%;
+	height:55px;
+	background:#f0f0f0;
+	text-align:center;
+	padding:30px 0;
+}
+.footer-inner{
+	margin:0 auto;
+}
+</style>
+<script>
+  registerBackToTop: function () {
+    var THRESHOLD = 50;
+    var $top = $('.back-to-top');
+    $(window).on('scroll', function () {
+      $top.toggleClass('back-to-top-on', window.pageYOffset > THRESHOLD);
+    });
+
+    $top.on('click', function () {
+      $('body').velocity('scroll');
+    });
+  }
+</script>
+</head>
+<body>
+<header>
+<div class="nav">
+<div class="icon">
+<h1>Tiancz</h1>
+</div>
+<div class="menu">
+<ul>
+<li><a href="{% url 'blog:index' %}"><i class="fa fa-home fa-fw"></i>首页</a></li>
+<li><a href="{% url 'blog:archive' %}"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+<li><a href="{% url 'blog:category' %}"><i class="fa fa-th fa-fw"></i>分类</a></li>
+<li><a href="{% url 'blog:tags' %}"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+<li><a href="{% url 'blog:about' %}"><i class="fa fa-user fa-fw"></i>关于</a></li>
+</ul>
+</div>
+</div>
+</header>
+<div class="content">
+
+<h1>tian chaozhe</h1>
+<ul>
+<li><h2>田超哲</h2></li>
+<li><h2>长安大学</h2></li>
+<li><h2>nathanieltian@163.com</h2></li>
+<li><h2>平安科技核心信托系统开发部</h2></li>
+</ul>
+</div>
+<div class="footer">
+<div class="footer-inner">
+<i class="fa fa-copyright fa-fw"></i>2017
+<i class="fa fa-heart fa-fw"></i>Tian Chaozhe
+</div>
+</div>
+<div class="back-to-top">
+	<i class="fa fa-arrow-up"></i>
+</div>
+</body>
+</html>

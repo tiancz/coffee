@@ -1,0 +1,178 @@
+<html>
+<head>
+<title>Home</title>
+{% load static %}
+<link type="text/css" href="{% static 'blog/css/font-awesome.min.css' %}" rel="stylesheet">
+<style type="text/css">
+body{
+	margin:0px;
+	padding:0px;
+}
+.nav{
+	width:100%;
+	left:0px;
+	top:0px;
+	right:0px;
+	height:130px;
+	background:#808080;
+	text-align:center;
+	vertical-align:middle;
+}
+.content{
+	width:70%;
+	margin-top:30px;
+	margin-left:15%;
+}
+.icon{
+	vertical-align:middle;
+}
+.menu{
+	vertical-align:middle;
+}
+li{
+	display:inline-block;
+	list-style-type:none;
+	font-size:15px;
+	padding:0 5px;
+}
+a{
+	text-decoration:none;
+	color:#f0f0f0;
+}
+a:hover{
+	cursor:pointer;
+	color:#000;
+}
+.blog a{
+	color:#000;
+	display:block;
+}
+.blog a:hover{
+	color:#aaa;
+}
+.pagination{
+	margin-top:50px;
+}
+.pagination a{
+	color:#555;
+	text-decoration:none;
+}
+.title{
+	font-size:26px;
+	font-weight:400;
+	text-align:center;
+}
+.summary{
+	font-family:'Lato',"PingFang SC","Microsoft YaHei",sans-serif;
+	font-size:14px;
+}
+.info{
+	text-align:center;
+}
+.pagination a:hover{
+	cursor:pointer;
+	color:#aaa;
+}
+.pagination{
+	margin-bottom:50px;
+	text-align:center;
+}
+.pre{
+	text-align:left;
+}
+.next{
+	text-align:right;
+}
+.footer{
+	position:relative;
+	left:0;
+	bottom:0;
+	width:100%;
+	background:#f0f0f0;
+	text-align:center;
+	padding:20px 0;
+}
+.footer-inner{
+	margin:0 auto;
+}
+</style>
+<script>
+  registerBackToTop: function () {
+    var THRESHOLD = 50;
+    var $top = $('.back-to-top');
+    $(window).on('scroll', function () {
+      $top.toggleClass('back-to-top-on', window.pageYOffset > THRESHOLD);
+    });
+
+    $top.on('click', function () {
+      $('body').velocity('scroll');
+    });
+  }
+</script>
+</head>
+<body>
+<header>
+<div class="nav">
+<div class="icon">
+<h1>Tiancz</h1>
+</div>
+<div class="menu">
+<ul>
+<li><a href="{% url 'blog:index' %}"><i class="fa fa-home fa-fw"></i>首页</a></li>
+<li><a href="{% url 'blog:archive' %}"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+<li><a href="{% url 'blog:category' %}"><i class="fa fa-th fa-fw"></i>分类</a></li>
+<li><a href="{% url 'blog:tags' %}"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+<li><a href="{% url 'blog:about' %}"><i class="fa fa-user fa-fw"></i>关于</a></li>
+</ul>
+</div>
+</div>
+</header>
+<div class="content">
+{% for blog in blogs %}
+	<div class="blog">
+	{% autoescape off %}
+		<div class="title">
+			<a href="{% url 'blog:blog_detail' blog.id %}">
+			{{ blog.title }}
+			</a>
+		</div>
+		<div class="info">
+			<span class="author" style="color:#4a86e8">write by {{ blog.author }}</span>
+		</div>
+		<div class="summary">
+			{{ blog.content|truncatewords:100}}
+		</div>
+		<hr size="3" width="80%" color=#000>
+	{% endautoescape %}
+	</div>
+{% endfor %}
+
+</div>
+<div class="pagination">
+	<span class="step-links">
+		<span class="pre">
+		{% if blogs.has_previous %}
+			<a href="?page={{ blogs.previous_page_number }}">上一页</a>
+		{% endif %}
+		</span>
+		<span class="current">
+			Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}.
+		</span>
+		<span class="next">
+		{% if blogs.has_next %}
+			<a href="?page={{ blogs.next_page_number }}">下一页</a>
+		{% endif %}
+		</span>
+	</span>
+</div>
+<div class="back-to-top">
+	<i class="fa fa-arrow-up"></i>
+</div>
+<div class="footer">
+<div class="footer-inner">
+<i class="fa fa-copyright fa-fw"></i>2017
+<i class="fa fa-heart fa-fw"></i>Tian Chaozhe
+</div>
+</div>
+</body>
+</html>
